@@ -11,26 +11,27 @@ namespace mlwinum.PetShop.Domain.Services
         public PetService(IPetRepository petRepository) => (_petRepository) = (petRepository);
         public bool CreatePet(Pet pet)
         {
-            throw new System.NotImplementedException();
+            return _petRepository.CreatePet(pet);
         }
 
         public Pet GetPet(string name)
         {
-            throw new System.NotImplementedException();
+            return _petRepository.GetPet(name);
         }
 
         public Pet UpdatePet(Pet oldPet, Pet newPet)
         {
-            throw new System.NotImplementedException();
+            return _petRepository.UpdatePet(oldPet, newPet);
         }
 
         public bool RemovePet(Pet pet)
         {
-            throw new System.NotImplementedException();
+            return _petRepository.DeletePet(pet);
         }
 
         public IEnumerable<Pet> GetAllPets()
         {
+            return _petRepository.GetAllPets();
         }
     }
 }
