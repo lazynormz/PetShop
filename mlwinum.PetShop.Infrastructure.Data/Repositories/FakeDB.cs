@@ -5,14 +5,14 @@ using mlwinum.PetShop.Domain.IRepositories;
 
 namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 {
-    public class PetRepository : IPetRepository, IPetTypeRepository
+    public class FakeDB : IPetRepository, IPetTypeRepository
     {
         private List<Pet> _pets;
         private List<PetType> _petTypes;
         private static int _petId;
         private static int _petTypeId;
 
-        public PetRepository()
+        public FakeDB()
         {
             _pets = new List<Pet>();
             _petTypes = new List<PetType>();

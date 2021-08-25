@@ -11,7 +11,7 @@ namespace mlwinum.PetShop.UI
     {
         static void Main(string[] args)
         {
-            IPetRepository _petRepository = new PetRepository();
+            IPetRepository _petRepository = new FakeDB();
             IPetService _petService = new PetService(_petRepository);
             Menu menu = new Menu(_petService);
             menu.Start();
