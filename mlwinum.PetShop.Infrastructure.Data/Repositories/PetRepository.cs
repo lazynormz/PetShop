@@ -3,44 +3,55 @@ using System.Collections.Generic;
 using mlwinum.petshop.core.Models;
 using mlwinum.PetShop.Domain.IRepositories;
 
-namespace mlwinum.PetShop.Infrastructure.Data
+namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 {
-    public class PetRepository : IPetRepository
+    public class PetRepository : IPetRepository, IPetTypeRepository
     {
         private List<Pet> _pets;
         private List<PetType> _petTypes;
-        private static int _id;
+        private static int _petId;
+        private static int _petTypeId;
 
         public PetRepository()
         {
             _pets = new List<Pet>();
             _petTypes = new List<PetType>();
-            _id = 0;
+            _petId = 0;
+            _petTypeId = 0;
             InitData();
         }
 
         public void InitData()
         {
-            CreatePet(new Pet(_id,"a",null,DateTime.Now, DateTime.Now,"",123));
-            CreatePet(new Pet(_id,"b",null,DateTime.Now, DateTime.Now,"",456));
-            CreatePet(new Pet(_id,"c",null,DateTime.Now, DateTime.Now,"",789));
-            CreatePet(new Pet(_id,"d",null,DateTime.Now, DateTime.Now,"",159));
-            CreatePet(new Pet(_id,"e",null,DateTime.Now, DateTime.Now,"",753));
-            CreatePet(new Pet(_id,"f",null,DateTime.Now, DateTime.Now,"",951));
-            CreatePet(new Pet(_id,"g",null,DateTime.Now, DateTime.Now,"",753));
+            //Random petTypes
+            CreatePetType(new PetType(_petTypeId, "Cat"));
+            CreatePetType(new PetType(_petTypeId, "Dog"));
+            CreatePetType(new PetType(_petTypeId, "Fish"));
+            CreatePetType(new PetType(_petTypeId, "Goat"));
+            CreatePetType(new PetType(_petTypeId, "Cow"));
+            CreatePetType(new PetType(_petTypeId, "Pig"));
+            CreatePetType(new PetType(_petTypeId, "Chicken"));
+            //Random pets
+            CreatePet(new Pet(_petId,"a",GetPetType(0),DateTime.Now, DateTime.Now,"",123));
+            CreatePet(new Pet(_petId,"b",GetPetType(1),DateTime.Now, DateTime.Now,"",456));
+            CreatePet(new Pet(_petId,"c",GetPetType(2),DateTime.Now, DateTime.Now,"",789));
+            CreatePet(new Pet(_petId,"d",GetPetType(3),DateTime.Now, DateTime.Now,"",159));
+            CreatePet(new Pet(_petId,"e",GetPetType(4),DateTime.Now, DateTime.Now,"",753));
+            CreatePet(new Pet(_petId,"f",GetPetType(5),DateTime.Now, DateTime.Now,"",951));
+            CreatePet(new Pet(_petId,"g",GetPetType(6),DateTime.Now, DateTime.Now,"",753));
         }
 
         public bool CreatePet(Pet pet)
         {
             //TODO: Make sure there are no duplicates in the list
             _pets.Add(pet);
-            _id++;
+            _petId++;
             return true;
         }
 
         public Pet GetPet(string name)
         {
-            throw new System.NotImplementedException();
+            return _pets.Find(pet => pet.Name == name);
         }
 
         public Pet UpdatePet(Pet oldPet, Pet newPet)
@@ -56,6 +67,39 @@ namespace mlwinum.PetShop.Infrastructure.Data
         public IEnumerable<Pet> GetAllPets()
         {
             return _pets;
+        }
+
+        public bool CreatePetType(PetType type)
+        {
+            //TODO: Make sure no duplicates are available
+            _petTypes.Add(type);
+            _petTypeId++;
+            return true;
+        }
+
+        public PetType GetPetType(string name)
+        {
+            return _petTypes.Find(type => type.Name == name);
+        }
+
+        public PetType GetPetType(int id)
+        {
+            return _petTypes.Find(type => type.ID == id);
+        }
+
+        public PetType UpdatePetType(PetType oldPetType, PetType newPetType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeletePetType(PetType pet)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<PetType> GetAllPetTypes()
+        {
+            return _petTypes;
         }
     }
 }
