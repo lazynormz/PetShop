@@ -1,7 +1,8 @@
 using System;
 using mlwinum.petshop.core.IServices;
 using mlwinum.petshop.core.Models;
-using mlwinum.PetShop.Infrastructure.Data;
+using static mlwinum.PetShop.UI.Util.Printer;
+
 
 namespace mlwinum.PetShop.UI
 {
@@ -15,14 +16,14 @@ namespace mlwinum.PetShop.UI
         {
             foreach (Pet pet in _petService.GetAllPets())
             {
-                Console.WriteLine($"Pet: {{ Id: {pet.ID} | Name: \"{pet.Name}\" | Pet Type: \"{pet.Type.Name}\" | Date of birth: {pet.BirthDate} | Buy price: {pet.Price} }}");
+                Print($"Pet: {{ Id: {pet.ID} | Name: \"{pet.Name}\" | Pet Type: \"{pet.Type.Name}\" | Date of birth: {pet.BirthDate} | Buy price: {pet.Price} }}");
             }
         }
 
         public void PrintPet(string name)
         {
             Pet pet = _petService.GetPet(name);
-            Console.WriteLine($"Pet: {{{pet.ID} | {pet.Name} | {pet.Type.Name} | {pet.BirthDate} | {pet.Price}}}");
+            Print($"Pet: {{{pet.ID} | {pet.Name} | {pet.Type.Name} | {pet.BirthDate} | {pet.Price}}}");
         }
 
         public void Start()
