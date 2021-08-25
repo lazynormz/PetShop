@@ -16,6 +16,7 @@ namespace mlwinum.PetShop.Infrastructure.Data
             _pets = new List<Pet>();
             _petTypes = new List<PetType>();
             _id = 0;
+            InitData();
         }
 
         public void InitData()

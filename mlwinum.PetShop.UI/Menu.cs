@@ -1,6 +1,7 @@
 using System;
 using mlwinum.petshop.core.IServices;
 using mlwinum.petshop.core.Models;
+using mlwinum.PetShop.Infrastructure.Data;
 
 namespace mlwinum.PetShop.UI
 {
@@ -22,6 +23,11 @@ namespace mlwinum.PetShop.UI
         {
             Pet pet = _petService.GetPet(name);
             Console.WriteLine($"Pet: {{{pet.ID} | {pet.Name} | {pet.Type.Name} | {pet.BirthDate} | {pet.Price}}}");
+        }
+
+        public void Start()
+        {
+            PrintAllPets();
         }
     }
 }

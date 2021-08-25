@@ -10,12 +10,10 @@ namespace mlwinum.PetShop.UI
     {
         static void Main(string[] args)
         {
-            PetRepository _petRepository = new PetRepository();
-            _petRepository.InitData();
-            
+            IPetRepository _petRepository = new PetRepository();
             IPetService _petService = new PetService(_petRepository);
             Menu menu = new Menu(_petService);
-            menu.PrintAllPets();
+            menu.Start();
         }
     }
 }
