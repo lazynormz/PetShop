@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using mlwinum.petshop.core.IServices;
 using mlwinum.petshop.core.Models;
+using mlwinum.PetShop.Domain.IRepositories;
 
 namespace mlwinum.PetShop.Domain.Services
 {
     public class PetService : IPetService
     {
+        private IPetRepository _petRepository;
+        public PetService(IPetRepository petRepository) => (_petRepository) = (petRepository);
         public bool CreatePet(Pet pet)
         {
             throw new System.NotImplementedException();
@@ -28,7 +31,6 @@ namespace mlwinum.PetShop.Domain.Services
 
         public IEnumerable<Pet> GetAllPets()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

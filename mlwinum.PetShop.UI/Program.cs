@@ -1,4 +1,6 @@
 ﻿using System;
+using mlwinum.petshop.core.IServices;
+using mlwinum.PetShop.Domain.Services;
 
 namespace mlwinum.PetShop.UI
 {
@@ -6,7 +8,8 @@ namespace mlwinum.PetShop.UI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IPetService _petService = new PetService();
+            Menu menu = new Menu(_petService);
         }
     }
 }

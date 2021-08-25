@@ -5,4 +5,9 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\mlwinum.PetShop.Core\mlwinum.PetShop.Core.csproj" />
+      <ProjectReference Include="..\mlwinum.PetShop.Domain\mlwinum.PetShop.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
