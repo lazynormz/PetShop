@@ -17,7 +17,7 @@ namespace mlwinum.petshop.core.Models
         {
             ID = id;
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Type = type;
+            Type = type ?? throw new ArgumentNullException(nameof(type));
             BirthDate = birthDate;
             SoldDate = soldDate;
             Colour = colour ?? throw new ArgumentNullException(nameof(colour));

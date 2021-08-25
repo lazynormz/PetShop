@@ -15,7 +15,7 @@ namespace mlwinum.PetShop.UI
         {
             foreach (Pet pet in _petService.GetAllPets())
             {
-                Console.WriteLine($"Pet: {{ Id: {pet.ID} | Name: \"{pet.Name}\" | Date of birth: {pet.BirthDate} | Buy price: {pet.Price} }}");
+                Console.WriteLine($"Pet: {{ Id: {pet.ID} | Name: \"{pet.Name}\" | Pet Type: \"{pet.Type.Name}\" | Date of birth: {pet.BirthDate} | Buy price: {pet.Price} }}");
             }
         }
 
