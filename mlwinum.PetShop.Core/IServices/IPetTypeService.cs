@@ -8,7 +8,7 @@ namespace mlwinum.petshop.core.IServices
         bool CreatePetType(PetType pet);
         PetType GetPetType(string name);
         PetType UpdatePetType(PetType oldPetType, PetType newPetType);
-        bool RemovePetType(PetType pet);
+        bool RemovePetType(PetType type);
         IEnumerable<PetType> GetAllPetTypes();
     }
 }

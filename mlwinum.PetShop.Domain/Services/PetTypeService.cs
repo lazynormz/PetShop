@@ -1,34 +1,38 @@
 using System.Collections.Generic;
 using mlwinum.petshop.core.IServices;
 using mlwinum.petshop.core.Models;
+using mlwinum.PetShop.Domain.IRepositories;
 
 namespace mlwinum.PetShop.Domain.Services
 {
     public class PetTypeService : IPetTypeService
     {
-        public bool CreatePetType(PetType pet)
+        private IPetTypeRepository _petTypeRepository;
+        public PetTypeService(IPetTypeRepository petTypeService) => (_petTypeRepository) = (petTypeService);
+
+        public bool CreatePetType(PetType type)
         {
-            throw new System.NotImplementedException();
+            return _petTypeRepository.CreatePetType(type);
         }
 
         public PetType GetPetType(string name)
         {
-            throw new System.NotImplementedException();
+            return _petTypeRepository.GetPetType(name);
         }
 
         public PetType UpdatePetType(PetType oldPetType, PetType newPetType)
         {
-            throw new System.NotImplementedException();
+            return _petTypeRepository.UpdatePetType(oldPetType, newPetType);
         }
 
-        public bool RemovePetType(PetType pet)
+        public bool RemovePetType(PetType type)
         {
-            throw new System.NotImplementedException();
+            return _petTypeRepository.DeletePetType(type);
         }
 
         public IEnumerable<PetType> GetAllPetTypes()
         {
-            throw new System.NotImplementedException();
+            return _petTypeRepository.GetAllPetTypes();
         }
     }
 }

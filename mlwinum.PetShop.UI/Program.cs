@@ -11,9 +11,14 @@ namespace mlwinum.PetShop.UI
     {
         static void Main(string[] args)
         {
+            //Repo
             IPetRepository _petRepository = new FakeDB();
+            IPetTypeRepository _petTypeRepository = (IPetTypeRepository) _petRepository;
+            //Service
             IPetService _petService = new PetService(_petRepository);
-            Menu menu = new Menu(_petService);
+            IPetTypeService _petTypeService = new PetTypeService(_petTypeRepository);
+            //Menu creation and start
+            Menu menu = new Menu(_petService, _petTypeService);
             menu.Start();
         }
     }

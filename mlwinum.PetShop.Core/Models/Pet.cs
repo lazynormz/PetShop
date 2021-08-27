@@ -12,10 +12,10 @@ namespace mlwinum.petshop.core.Models
         public string Colour { get; set; }
         public double Price { get; set; }
 
-        public Pet(int id, string name, PetType type, DateTime birthDate, DateTime soldDate, string colour,
+        public Pet(){}
+        public Pet(string name, PetType type, DateTime birthDate, DateTime soldDate, string colour,
             double price)
         {
-            ID = id;
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Type = type ?? throw new ArgumentNullException(nameof(type));
             BirthDate = birthDate;

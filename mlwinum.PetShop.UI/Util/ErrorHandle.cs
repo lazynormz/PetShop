@@ -5,7 +5,7 @@ namespace mlwinum.PetShop.UI.Util
 {
     public class ErrorHandle
     {
-        public void Error(ErrorType error)
+        public static void Error(ErrorType error)
         {
             switch (error)
             {
@@ -20,6 +20,12 @@ namespace mlwinum.PetShop.UI.Util
                     break;
                 case ErrorType.FAILED_DELETING_PETTYPE:
                     PrintError("Failed deleting pet type from database");
+                    break;
+                case ErrorType.COMMAND_NOT_RECOGNIZED:
+                    PrintError("Command was not recognized, try again");
+                    break;
+                case ErrorType.FAILED_GETTNG_PET_TYPE:
+                    PrintError("Type of pet not found in the database");
                     break;
                 default:
                     Console.WriteLine();

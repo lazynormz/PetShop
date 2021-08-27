@@ -9,6 +9,7 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
     {
         private List<Pet> _pets;
         private List<PetType> _petTypes;
+        
         private static int _petId;
         private static int _petTypeId;
 
@@ -32,26 +33,27 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
             CreatePetType(new PetType(_petTypeId, "Pig"));
             CreatePetType(new PetType(_petTypeId, "Chicken"));
             //Random pets
-            CreatePet(new Pet(_petId,"a",GetPetType(0),DateTime.Now, DateTime.Now,"",123));
-            CreatePet(new Pet(_petId,"b",GetPetType(1),DateTime.Now, DateTime.Now,"",456));
-            CreatePet(new Pet(_petId,"c",GetPetType(2),DateTime.Now, DateTime.Now,"",789));
-            CreatePet(new Pet(_petId,"d",GetPetType(3),DateTime.Now, DateTime.Now,"",159));
-            CreatePet(new Pet(_petId,"e",GetPetType(4),DateTime.Now, DateTime.Now,"",753));
-            CreatePet(new Pet(_petId,"f",GetPetType(5),DateTime.Now, DateTime.Now,"",951));
-            CreatePet(new Pet(_petId,"g",GetPetType(6),DateTime.Now, DateTime.Now,"",753));
+            CreatePet(new Pet("a",GetPetType(0),DateTime.Now, DateTime.Now,"",123));
+            CreatePet(new Pet("b",GetPetType(1),DateTime.Now, DateTime.Now,"",456));
+            CreatePet(new Pet("c",GetPetType(2),DateTime.Now, DateTime.Now,"",789));
+            CreatePet(new Pet("d",GetPetType(3),DateTime.Now, DateTime.Now,"",159));
+            CreatePet(new Pet("e",GetPetType(4),DateTime.Now, DateTime.Now,"",753));
+            CreatePet(new Pet("f",GetPetType(5),DateTime.Now, DateTime.Now,"",951));
+            CreatePet(new Pet("g",GetPetType(6),DateTime.Now, DateTime.Now,"",753));
         }
 
         public bool CreatePet(Pet pet)
         {
             //TODO: Make sure there are no duplicates in the list
+            pet.ID = _petId;
             _pets.Add(pet);
-            _petId++;
+            ++_petId;
             return true;
         }
 
         public Pet GetPet(string name)
         {
-            return _pets.Find(pet => pet.Name == name);
+            return _pets.Find(pet => pet.Name.ToLower() == name.ToLower());
         }
 
         public Pet UpdatePet(Pet oldPet, Pet newPet)
@@ -72,6 +74,7 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
         public bool CreatePetType(PetType type)
         {
             //TODO: Make sure no duplicates are available
+            type.Name = type.Name.ToLower();
             _petTypes.Add(type);
             _petTypeId++;
             return true;
@@ -79,7 +82,7 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 
         public PetType GetPetType(string name)
         {
-            return _petTypes.Find(type => type.Name == name);
+            return _petTypes.Find(type => type.Name.ToLower() == name.ToLower());
         }
 
         public PetType GetPetType(int id)
