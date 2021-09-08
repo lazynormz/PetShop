@@ -7,8 +7,8 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 {
     public class FakeDB : IPetRepository, IPetTypeRepository
     {
-        private List<Pet> _pets;
-        private List<PetType> _petTypes;
+        private static List<Pet> _pets;
+        private static List<PetType> _petTypes;
         
         private static int _petId;
         private static int _petTypeId;
@@ -33,13 +33,13 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
             CreatePetType(new PetType(_petTypeId, "Pig"));
             CreatePetType(new PetType(_petTypeId, "Chicken"));
             //Random pets
-            CreatePet(new Pet("a",GetPetType(0),DateTime.Now, DateTime.Now,"",123));
-            CreatePet(new Pet("b",GetPetType(1),DateTime.Now, DateTime.Now,"",456));
-            CreatePet(new Pet("c",GetPetType(2),DateTime.Now, DateTime.Now,"",789));
-            CreatePet(new Pet("d",GetPetType(3),DateTime.Now, DateTime.Now,"",159));
-            CreatePet(new Pet("e",GetPetType(4),DateTime.Now, DateTime.Now,"",753));
-            CreatePet(new Pet("f",GetPetType(5),DateTime.Now, DateTime.Now,"",951));
-            CreatePet(new Pet("g",GetPetType(6),DateTime.Now, DateTime.Now,"",753));
+            CreatePet(new Pet("a",GetPetType(0),DateTime.Now, DateTime.Now,"black",123));
+            CreatePet(new Pet("b",GetPetType(1),DateTime.Now, DateTime.Now,"brown",456));
+            CreatePet(new Pet("c",GetPetType(2),DateTime.Now, DateTime.Now,"blue",789));
+            CreatePet(new Pet("d",GetPetType(3),DateTime.Now, DateTime.Now,"orange",159));
+            CreatePet(new Pet("e",GetPetType(4),DateTime.Now, DateTime.Now,"spotted",753));
+            CreatePet(new Pet("f",GetPetType(5),DateTime.Now, DateTime.Now,"somwhat like a cow",951));
+            CreatePet(new Pet("g",GetPetType(6),DateTime.Now, DateTime.Now,"red",753));
         }
 
         public bool CreatePet(Pet pet)
@@ -58,12 +58,19 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 
         public Pet UpdatePet(Pet oldPet, Pet newPet)
         {
-            throw new System.NotImplementedException();
+            Pet p = _pets.Find(pet => pet.Equals(oldPet));
+            p.Name = newPet.Name;
+            p.Colour = newPet.Colour;
+            p.Price = newPet.Price;
+            p.Type = newPet.Type;
+            p.SoldDate = newPet.SoldDate;
+            _pets[_pets.IndexOf(oldPet)] = p;
+            return p;
         }
 
         public bool DeletePet(Pet pet)
         {
-            throw new System.NotImplementedException();
+            return _pets.Remove(pet);
         }
 
         public IEnumerable<Pet> GetAllPets()
@@ -92,12 +99,15 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 
         public PetType UpdatePetType(PetType oldPetType, PetType newPetType)
         {
-            throw new NotImplementedException();
+            PetType p = _petTypes.Find(pet => pet.Equals(oldPetType));
+            p.Name = newPetType.Name;
+            _petTypes[_petTypes.IndexOf(oldPetType)] = p;
+            return p;
         }
 
         public bool DeletePetType(PetType pet)
         {
-            throw new NotImplementedException();
+            return _petTypes.Remove(pet);
         }
 
         public IEnumerable<PetType> GetAllPetTypes()

@@ -27,7 +27,10 @@ namespace mlwinum.PetShop.UI.Util
                 case ErrorType.FAILED_GETTNG_PET_TYPE:
                     PrintError("Type of pet not found in the database");
                     break;
-                default:
+                case ErrorType.FAILED_GETTING_PET:
+                    PrintError("Pet with specified name was not found in the database");
+                    break;
+                default:        //Case we manage to input something that doesn't exist; shouldn't really be a case
                     Console.WriteLine();
                     break;
             }
