@@ -5,7 +5,7 @@ using mlwinum.PetShop.Domain.IRepositories;
 
 namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 {
-    public class FakeDB : IPetRepository, IPetTypeRepository
+    public class FakeDB : IPetRepository, IPetTypeRepository, IOwnerRepository
     {
         private static List<Pet> _pets;
         private static List<PetType> _petTypes;
@@ -33,13 +33,13 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
             CreatePetType(new PetType(_petTypeId, "Pig"));
             CreatePetType(new PetType(_petTypeId, "Chicken"));
             //Random pets
-            CreatePet(new Pet("a",GetPetType(0),DateTime.Now, DateTime.Now,"black",123));
-            CreatePet(new Pet("b",GetPetType(1),DateTime.Now, DateTime.Now,"brown",456));
-            CreatePet(new Pet("c",GetPetType(2),DateTime.Now, DateTime.Now,"blue",789));
-            CreatePet(new Pet("d",GetPetType(3),DateTime.Now, DateTime.Now,"orange",159));
-            CreatePet(new Pet("e",GetPetType(4),DateTime.Now, DateTime.Now,"spotted",753));
-            CreatePet(new Pet("f",GetPetType(5),DateTime.Now, DateTime.Now,"somwhat like a cow",951));
-            CreatePet(new Pet("g",GetPetType(6),DateTime.Now, DateTime.Now,"red",753));
+            CreatePet(new Pet("a",GetPetType(0),DateTime.Now, DateTime.Now,"black",123, null));
+            CreatePet(new Pet("b",GetPetType(1),DateTime.Now, DateTime.Now,"brown",456, null));
+            CreatePet(new Pet("c",GetPetType(2),DateTime.Now, DateTime.Now,"blue",789, null));
+            CreatePet(new Pet("d",GetPetType(3),DateTime.Now, DateTime.Now,"orange",159, null));
+            CreatePet(new Pet("e",GetPetType(4),DateTime.Now, DateTime.Now,"spotted",753, null));
+            CreatePet(new Pet("f",GetPetType(5),DateTime.Now, DateTime.Now,"somwhat like a cow",951, null));
+            CreatePet(new Pet("g",GetPetType(6),DateTime.Now, DateTime.Now,"red",753, null));
         }
 
         public Pet CreatePet(Pet pet)
@@ -119,6 +119,31 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
         public IEnumerable<PetType> GetAllPetTypes()
         {
             return _petTypes;
+        }
+
+        public Owner CreateOwner(Owner owner)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Owner GetOwner(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Owner> GetOwners()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Owner UpdateOwner()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteOwner()
+        {
+            throw new NotImplementedException();
         }
     }
 }
