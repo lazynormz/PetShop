@@ -42,18 +42,24 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
             CreatePet(new Pet("g",GetPetType(6),DateTime.Now, DateTime.Now,"",753));
         }
 
-        public bool CreatePet(Pet pet)
+        public Pet CreatePet(Pet pet)
         {
             //TODO: Make sure there are no duplicates in the list
             pet.ID = _petId;
+            pet.Type = GetPetType(pet.Type.ID);
             _pets.Add(pet);
             ++_petId;
-            return true;
+            return pet;
         }
 
         public Pet GetPet(string name)
         {
             return _pets.Find(pet => pet.Name.ToLower() == name.ToLower());
+        }
+
+        public Pet GetPet(long id)
+        {
+            return _pets.Find(pet => pet.ID == id);
         }
 
         public Pet UpdatePet(Pet oldPet, Pet newPet)

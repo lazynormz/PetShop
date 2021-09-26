@@ -16,11 +16,11 @@ namespace mlwinum.petshop.core.Models
         public Pet(string name, PetType type, DateTime birthDate, DateTime soldDate, string colour,
             double price)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            Type = type ?? throw new ArgumentNullException(nameof(type));
+            Name = name;
+            Type = type;
             BirthDate = birthDate;
             SoldDate = soldDate;
-            Colour = colour ?? throw new ArgumentNullException(nameof(colour));
+            Colour = colour;
             Price = price;
         }
     }

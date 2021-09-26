@@ -9,7 +9,7 @@ namespace mlwinum.PetShop.Domain.Services
     {
         private IPetRepository _petRepository;
         public PetService(IPetRepository petRepository) => (_petRepository) = (petRepository);
-        public bool CreatePet(Pet pet)
+        public Pet CreatePet(Pet pet)
         {
             return _petRepository.CreatePet(pet);
         }
@@ -17,6 +17,11 @@ namespace mlwinum.PetShop.Domain.Services
         public Pet GetPet(string name)
         {
             return _petRepository.GetPet(name);
+        }
+
+        public Pet GetPet(long id)
+        {
+            return _petRepository.GetPet(id);
         }
 
         public Pet UpdatePet(Pet oldPet, Pet newPet)

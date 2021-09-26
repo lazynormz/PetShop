@@ -10,7 +10,7 @@ namespace mlwinum.petshop.core.Models
         public PetType(int id, string name)
         {
             ID = id;
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Name = name;
         }
     }
 }

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\mlwinum.PetShop.Core\mlwinum.PetShop.Core.csproj" />
+      <ProjectReference Include="..\mlwinum.PetShop.Domain\mlwinum.PetShop.Domain.csproj" />
+      <ProjectReference Include="..\mlwinum.PetShop.Infrastructure.Data\mlwinum.PetShop.Infrastructure.Data.csproj" />
+    </ItemGroup>
+
+</Project>

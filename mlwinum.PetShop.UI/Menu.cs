@@ -60,7 +60,7 @@ namespace mlwinum.PetShop.UI
                 pet.Type = pt;
                 pet.BirthDate = DateTime.Now;
                 pet.SoldDate = DateTime.Now;
-                if (_petService.CreatePet(pet))
+                if (_petService.CreatePet(pet) != null)
                 {
                     Print("Pet created successfully!");
                     Console.WriteLine("\n");

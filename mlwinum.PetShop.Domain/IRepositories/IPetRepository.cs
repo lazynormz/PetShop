@@ -5,8 +5,9 @@ namespace mlwinum.PetShop.Domain.IRepositories
 {
     public interface IPetRepository
     {
-        bool CreatePet(Pet pet);
+        Pet CreatePet(Pet pet);
         Pet GetPet(string name);
+        Pet GetPet(long id);
         Pet UpdatePet(Pet oldPet, Pet newPet);
         bool DeletePet(Pet pet);
         IEnumerable<Pet> GetAllPets();
