@@ -40,8 +40,39 @@ namespace mlwinum.PetShop.UI
 
         public void PrintPet(string name)
         {
+            //TODO: override Pet.ToString instead of using this method
             Pet pet = _petService.GetPet(name);
-            Print($"Pet: {{ {pet.ID} | {pet.Name} | {pet.Type.Name} | {pet.BirthDate} | {pet.Price} }}\n");
+            if (pet != null)
+            {
+                Print($"Pet: {{ {pet.ID} | {pet.Name} | {pet.Type.Name} | {pet.BirthDate} | {pet.Price} }}\n");
+                return;
+            }
+            Error(ErrorType.FAILED_GETTING_PET);
+        }
+
+        private void UpdatePet(string petName)
+        {
+            Pet oPet = _petService.GetPet(petName);
+            Pet pet = oPet;
+            if (pet == null)
+            {
+                Error(ErrorType.FAILED_GETTING_PET);
+                return;
+            }
+            Print("If pre-existing data is correct, leave field empty...\n");
+            Print($"Enter new name of pet ({pet.Name})");
+            string name, colour;
+            double price;
+            DateTime soldDate;
+            if ((name = ReadLine()) != String.Empty)
+                pet.Name = name;
+            Print($"Enter new colour of pet ({pet.Colour})");
+            if ((colour = ReadLine()) != String.Empty)
+                pet.Colour = colour;
+            Print($"Enter new price of pet ({pet.Price})");
+            if ((price = ReadDouble()) != -99d)
+                pet.Price = price;
+            _petService.UpdatePet(oPet, pet);
         }
 
         private void CreatePet()
@@ -76,6 +107,18 @@ namespace mlwinum.PetShop.UI
             }
         }
 
+        private void DeletePet(string petName)
+        {
+            if(!_petService.RemovePet(_petService.GetPet(petName)))
+                Error(ErrorType.FAILED_DELETING_PET);
+        }
+
+        private void DeletePetType(string typeName)
+        {
+            if(!_petTypeService.RemovePetType(_petTypeService.GetPetType(typeName)))
+                Error(ErrorType.FAILED_DELETING_PETTYPE);
+        }
+
         public void Start()
         {
             PrintMenu();
@@ -84,30 +127,39 @@ namespace mlwinum.PetShop.UI
             {
                 switch (val)
                 {
-                    case 1:
+                    case 1:             //Create pet
                         CreatePet();
                         PrintMenu();
                         break;
-                    case 2:
+                    case 2:             //Create a new pet-type
                         break;
-                    case 3:
+                    case 3:             //Print list of all pets
                         PrintAllPets();
                         PrintMenu();
                         break;
-                    case 4:
+                    case 4:             //Print specific pet
                         Print("Enter the desired name of pet!");
                         PrintPet(ReadLine());
                         Print("\n");
                         Pause();
                         PrintMenu();
                         break;
-                    case 5:
+                    case 5:             //Delete a pet
+                        Print("Enter the name of pet to delete...");
+                        DeletePet(ReadLine());
+                        PrintMenu();
                         break;
-                    case 6:
+                    case 6:             //Delete a pet-type
+                        Print("Enter the name of the pet-type to be deleted");
+                        DeletePetType(ReadLine());
+                        PrintMenu();
                         break;
-                    case 7:
+                    case 7:             //Update a pet from the registry; search for pet -> update values -> upload
+                        Print("Enter the name of pet you wish to update...");
+                        UpdatePet(ReadLine());
+                        PrintMenu();
                         break;
-                    default:
+                    default:            //Error; command not found
                         Error(ErrorType.COMMAND_NOT_RECOGNIZED);
                         PrintMenu();
                         break;
