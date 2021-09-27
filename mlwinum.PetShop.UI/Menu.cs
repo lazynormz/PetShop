@@ -2,6 +2,7 @@ using System;
 using System.Transactions;
 using mlwinum.petshop.core.IServices;
 using mlwinum.petshop.core.Models;
+using mlwinum.PetShop.Infrastructure.Data.Repositories;
 using mlwinum.PetShop.UI.Util;
 using static mlwinum.PetShop.UI.Util.Printer;
 using static mlwinum.PetShop.UI.Util.Scanner;
@@ -12,9 +13,12 @@ namespace mlwinum.PetShop.UI
 {
     public class Menu
     {
-        private IPetService _petService;
-        private IPetTypeService _petTypeService;
-        public Menu(IPetService petService, IPetTypeService petTypeService) => (_petService, _petTypeService) = (petService, petTypeService);
+        private FakeDB _db;
+
+        public Menu()
+        {
+            _db = new FakeDB();
+        }
 
         public void PrintMenu()
         {
@@ -31,7 +35,7 @@ namespace mlwinum.PetShop.UI
 
         public void PrintAllPets()
         {
-            foreach (Pet pet in _petService.GetAllPets())
+            foreach (Pet pet in _db.GetAllPets())
             {
                 Print($"Pet: {{ Id: {pet.ID} | Name: \"{pet.Name}\" | Pet Type: \"{pet.Type.Name}\" | Date of birth: {pet.BirthDate} | Buy price: {pet.Price} }}");
             }
@@ -41,7 +45,7 @@ namespace mlwinum.PetShop.UI
         public void PrintPet(string name)
         {
             //TODO: override Pet.ToString instead of using this method
-            Pet pet = _petService.GetPet(name);
+            Pet pet = _db.GetPet(name);
             if (pet != null)
             {
                 Print($"Pet: {{ {pet.ID} | {pet.Name} | {pet.Type.Name} | {pet.BirthDate} | {pet.Price} }}\n");
@@ -52,7 +56,7 @@ namespace mlwinum.PetShop.UI
 
         private void UpdatePet(string petName)
         {
-            Pet oPet = _petService.GetPet(petName);
+            Pet oPet = _db.GetPet(petName);
             Pet pet = oPet;
             if (pet == null)
             {
@@ -72,7 +76,7 @@ namespace mlwinum.PetShop.UI
             Print($"Enter new price of pet ({pet.Price})");
             if ((price = ReadDouble()) != -99d)
                 pet.Price = price;
-            _petService.UpdatePet(oPet, pet);
+            _db.UpdatePet(oPet, pet);
         }
 
         private void CreatePet()
@@ -85,13 +89,13 @@ namespace mlwinum.PetShop.UI
             Print("What is the price of the new pet?");
             pet.Price = ReadDouble();
             Print("What type of animal is the new pet? (not case-sensitive)");
-            PetType pt = _petTypeService.GetPetType(ReadLine());
+            PetType pt = _db.GetPetType(ReadLine());
             if (pt != null)
             {
                 pet.Type = pt;
                 pet.BirthDate = DateTime.Now;
                 pet.SoldDate = DateTime.Now;
-                if (_petService.CreatePet(pet) != null)
+                if (_db.CreatePet(pet) != null)
                 {
                     Print("Pet created successfully!");
                     Console.WriteLine("\n");
@@ -107,15 +111,15 @@ namespace mlwinum.PetShop.UI
             }
         }
 
-        private void DeletePet(string petName)
+        private void DeletePet(string name)
         {
-            if(!_petService.RemovePet(_petService.GetPet(petName)))
+            if(!_db.DeletePetType(_db.GetPetType(name)))
                 Error(ErrorType.FAILED_DELETING_PET);
         }
 
         private void DeletePetType(string typeName)
         {
-            if(!_petTypeService.RemovePetType(_petTypeService.GetPetType(typeName)))
+            if(!_db.DeletePetType(_db.GetPetType(typeName)))
                 Error(ErrorType.FAILED_DELETING_PETTYPE);
         }
 
