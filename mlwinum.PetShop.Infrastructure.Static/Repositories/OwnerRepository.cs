@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using mlwinum.petshop.core.Models;
 using mlwinum.PetShop.Domain.IRepositories;
@@ -15,25 +16,32 @@ namespace mlwinum.PetShop.Infrastructure.Data.Repositories
         }
         public Owner CreateOwner(Owner owner)
         {
-            throw new System.NotImplementedException();
+            owner.Id = _id;
+            _owners.Add(owner);
+            _id++;
+            return owner;
         }
 
         public Owner GetOwner(int id)
         {
-            throw new System.NotImplementedException();
+            return _owners.Find(owner => owner.Id == id);
         }
 
         public IEnumerable<Owner> GetOwners()
         {
-            throw new System.NotImplementedException();
+            return _owners;
         }
 
-        public Owner UpdateOwner()
+        public Owner UpdateOwner(Owner oldOwner, Owner newOwner)
         {
-            throw new System.NotImplementedException();
+            Owner owner = GetOwner(oldOwner.Id);
+            owner = newOwner;
+            owner.Id = oldOwner.Id;
+            _owners[owner.Id] = owner;
+            return owner;
         }
 
-        public bool DeleteOwner()
+        public bool DeleteOwner(Owner owner)
         {
             throw new System.NotImplementedException();
         }
