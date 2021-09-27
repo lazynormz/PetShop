@@ -1,55 +1,68 @@
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using mlwinum.petshop.core.Models;
 using mlwinum.PetShop.Domain.IRepositories;
+using mlwinum.PetShop.Infrastructure.Data.Entities;
 
 namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 {
     public class PetTypeRepository : IPetTypeRepository
     {
-        private static List<PetType> _petTypes;
-        private static int _id;
-
-        public PetTypeRepository()
-        {
-            _petTypes = new List<PetType>();
-            _id = 0;
-        }
         
-        public bool CreatePetType(PetType type)
-        {
-            //TODO: Make sure no duplicates are available
-            type.Name = type.Name.ToLower();
-            _petTypes.Add(type);
-            _id++;
-            return true;
-        }
+        private readonly PetApplicationContext _ctx;
 
-        public PetType GetPetType(string name)
+        public PetTypeRepository(PetApplicationContext ctx) => (_ctx) = (ctx);
+
+        public PetType CreatePetType(PetType type)
         {
-            return _petTypes.Find(type => type.Name.ToLower() == name.ToLower());
+            PetTypeEntity e = _ctx.Add(new PetTypeEntity
+            {
+                ID = type.ID,
+                Name = type.Name
+            }).Entity;
+            _ctx.SaveChanges();
+
+            type.ID = e.ID;
+            return type;
         }
 
         public PetType GetPetType(int id)
         {
-            return _petTypes.Find(type => type.ID == id);
+            return _ctx.PetTypes.Select(type => new PetType
+            {
+                ID = type.ID,
+                Name = type.Name
+            }).FirstOrDefault(type => type.ID == id);
         }
 
-        public PetType UpdatePetType(PetType oldPetType, PetType newPetType)
+        public PetType UpdatePetType(int id, PetType newPetType)
         {
-            PetType p = _petTypes.Find(pet => pet.Equals(oldPetType));
-            p.Name = newPetType.Name;
-            _petTypes[_petTypes.IndexOf(oldPetType)] = p;
-            return p;
+            PetTypeEntity newEntity = new PetTypeEntity
+            {
+                ID = id,
+                Name = newPetType.Name
+            };
+            _ctx.PetTypes.Update(newEntity);
+            _ctx.SaveChanges();
+            newPetType.ID = id;
+            return newPetType;
         }
 
-        public bool DeletePetType(PetType type)
+        public bool DeletePetType(int id)
         {
-            return _petTypes.Remove(type);
+            _ctx.PetTypes.Remove(new PetTypeEntity {ID = id});
+            _ctx.SaveChanges();
+            return true;
         }
 
         public IEnumerable<PetType> GetAllPetTypes()
         {
-            return _petTypes;
+            return _ctx.PetTypes.Select(type => new PetType
+            {
+                ID = type.ID,
+                Name = type.Name
+            }).ToList();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace mlwinum.petshop.core.IServices
         Owner CreateOwner(Owner owner);
         Owner GetOwner(int id);
         IEnumerable<Owner> GetOwners();
-        Owner UpdateOwner();
-        bool DeleteOwner();
+        Owner UpdateOwner(int id, Owner newOwner);
+        bool DeleteOwner(int id);
     }
 }

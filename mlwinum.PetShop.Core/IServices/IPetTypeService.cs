@@ -5,10 +5,10 @@ namespace mlwinum.petshop.core.IServices
 {
     public interface IPetTypeService
     {
-        bool CreatePetType(PetType pet);
-        PetType GetPetType(string name);
-        PetType UpdatePetType(PetType oldPetType, PetType newPetType);
-        bool RemovePetType(PetType type);
+        PetType CreatePetType(PetType pet);
+        PetType GetByID(int id);
+        PetType UpdatePetType(int id, PetType newPetType);
+        bool RemovePetType(int id);
         IEnumerable<PetType> GetAllPetTypes();
     }
 }

@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using Microsoft.VisualBasic.CompilerServices;
 using mlwinum.petshop.core.IServices;
+using mlwinum.petshop.core.IValidator;
 using mlwinum.petshop.core.Models;
 using mlwinum.PetShop.Domain.IRepositories;
 
@@ -7,32 +11,46 @@ namespace mlwinum.PetShop.Domain.Services
 {
     public class PetTypeService : IPetTypeService
     {
-        private IPetTypeRepository _petTypeRepository;
-        public PetTypeService(IPetTypeRepository petTypeService) => (_petTypeRepository) = (petTypeService);
+        private readonly IPetTypeRepository _repo;
+        private readonly IValidator _validator;
+        public PetTypeService(IPetTypeRepository repo, IValidator validator) => (_repo, _validator) = (repo, validator);
 
-        public bool CreatePetType(PetType type)
+        public PetType CreatePetType(PetType type)
         {
-            return _petTypeRepository.CreatePetType(type);
+            if (!_validator.ValidatePetType(type))
+                throw new InvalidDataException("Invalid data while creating new pettype");
+            
+            return _repo.CreatePetType(type);
         }
 
-        public PetType GetPetType(string name)
+        public PetType GetByID(int id)
         {
-            return _petTypeRepository.GetPetType(name);
+            if (!_validator.PetTypeExists(id))
+                throw new FileNotFoundException("Pet Type ID does not exist!");
+            
+            return _repo.GetPetType(id);
         }
 
-        public PetType UpdatePetType(PetType oldPetType, PetType newPetType)
+        public PetType UpdatePetType(int id, PetType newPetType)
         {
-            return _petTypeRepository.UpdatePetType(oldPetType, newPetType);
+            if (!_validator.PetTypeExists(id))
+                throw new FileNotFoundException("Pet Type ID does not exist!");
+            
+            if (!_validator.ValidatePetType(newPetType))
+                throw new InvalidDataException($"Invalid data while updating PetType {id}");
+            return _repo.UpdatePetType(id, newPetType);
         }
 
-        public bool RemovePetType(PetType type)
+        public bool RemovePetType(int id)
         {
-            return _petTypeRepository.DeletePetType(type);
+            if (!_validator.PetTypeExists(id))
+                throw new FileNotFoundException("Pet Type ID does not exist!");
+            return _repo.DeletePetType(id);
         }
 
         public IEnumerable<PetType> GetAllPetTypes()
         {
-            return _petTypeRepository.GetAllPetTypes();
+            return _repo.GetAllPetTypes();
         }
     }
 }

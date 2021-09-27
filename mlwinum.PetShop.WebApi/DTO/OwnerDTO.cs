@@ -1,8 +1,9 @@
-namespace mlwinum.petshop.core.Models
+﻿using System;
+
+namespace mlwinum.PetShop.WebApi.DTO
 {
-    public class Owner
+    public class OwnerDTO
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phonenumber { get; set; }

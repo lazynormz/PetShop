@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using mlwinum.petshop.core.IServices;
+using mlwinum.petshop.core.IValidator;
 using mlwinum.petshop.core.Models;
 using mlwinum.PetShop.Domain.IRepositories;
 
@@ -7,36 +9,42 @@ namespace mlwinum.PetShop.Domain.Services
 {
     public class PetService : IPetService
     {
-        private IPetRepository _petRepository;
-        public PetService(IPetRepository petRepository) => (_petRepository) = (petRepository);
+        private readonly IPetRepository _repo;
+        private readonly IValidator _validator;
+        public PetService(IPetRepository repo, IValidator validator) => (_repo, _validator) = (repo, validator);
         public Pet CreatePet(Pet pet)
         {
-            return _petRepository.CreatePet(pet);
+            if (!_validator.ValidatePet(pet))
+                throw new InvalidDataException("Invalid data while creating new pet");
+            return _repo.AddPet(pet);
         }
 
-        public Pet GetPet(string name)
+        public Pet GetPet(int id)
         {
-            return _petRepository.GetPet(name);
+            if (!_validator.PetExists(id))
+                throw new FileNotFoundException("Requested pet does not exist");
+            return _repo.GetPet(id);
         }
 
-        public Pet GetPet(long id)
+        public Pet UpdatePet(int id, Pet newPet)
         {
-            return _petRepository.GetPet(id);
+            if (!_validator.PetExists(id))
+                throw new FileNotFoundException("Requested pet does not exist");
+            if (!_validator.ValidatePet(newPet))
+                throw new InvalidDataException($"Invalid data while updating pet {id}");
+            return _repo.UpdatePet(id, newPet);
         }
 
-        public Pet UpdatePet(Pet oldPet, Pet newPet)
+        public bool DeletePetID(int id)
         {
-            return _petRepository.UpdatePet(oldPet, newPet);
-        }
-
-        public bool RemovePet(Pet pet)
-        {
-            return _petRepository.DeletePet(pet);
+            if (!_validator.PetExists(id))
+                throw new FileNotFoundException("Requested pet does not exist");
+            return _repo.DeletePet(id);
         }
 
         public IEnumerable<Pet> GetAllPets()
         {
-            return _petRepository.GetAllPets();
+            return _repo.GetAllPets();
         }
     }
 }

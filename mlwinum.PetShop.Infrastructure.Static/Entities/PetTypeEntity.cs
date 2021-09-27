@@ -1,8 +1,6 @@
-using System;
-
-namespace mlwinum.petshop.core.Models
+﻿namespace mlwinum.PetShop.Infrastructure.Data.Entities
 {
-    public class PetType
+    public class PetTypeEntity
     {
         public int? ID { get; set; }
         public string Name { get; set; }

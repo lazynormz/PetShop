@@ -8,7 +8,7 @@ namespace mlwinum.PetShop.Domain.IRepositories
         Owner CreateOwner(Owner owner);
         Owner GetOwner(int id);
         IEnumerable<Owner> GetOwners();
-        Owner UpdateOwner(Owner oldOwner, Owner newOwner);
-        bool DeleteOwner(Owner o);
+        Owner UpdateOwner(int id, Owner newOwner);
+        bool DeleteOwner(int id);
     }
 }

@@ -6,10 +6,9 @@ namespace mlwinum.petshop.core.IServices
     public interface IPetService
     {
         Pet CreatePet(Pet pet);
-        Pet GetPet(string name);
-        Pet GetPet(long id);
-        Pet UpdatePet(Pet oldPet, Pet newPet);
-        bool RemovePet(Pet pet);
+        Pet GetPet(int id);
+        Pet UpdatePet(int id, Pet newPet);
+        bool DeletePetID(int id);
         IEnumerable<Pet> GetAllPets();
     }
 }

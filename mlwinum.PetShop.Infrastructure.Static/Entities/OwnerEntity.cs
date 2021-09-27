@@ -1,6 +1,6 @@
-namespace mlwinum.petshop.core.Models
+﻿namespace mlwinum.PetShop.Infrastructure.Data.Entities
 {
-    public class Owner
+    public class OwnerEntity
     {
         public int ID { get; set; }
         public string Name { get; set; }
