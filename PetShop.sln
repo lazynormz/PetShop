@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mlwinum.PetShop.Domain", "m
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mlwinum.PetShop.UI", "mlwinum.PetShop.UI\mlwinum.PetShop.UI.csproj", "{C399FEF8-E290-4D8C-BD42-B978434F5B85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mlwinum.PetShop.Infrastructure.Data", "mlwinum.PetShop.Infrastructure.Data\mlwinum.PetShop.Infrastructure.Data.csproj", "{78FDC009-CDBB-4863-9685-16D6ED3473B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mlwinum.PetShop.Infrastructure.Static", "mlwinum.PetShop.Infrastructure.Static\mlwinum.PetShop.Infrastructure.Static.csproj", "{78FDC009-CDBB-4863-9685-16D6ED3473B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mlwinum.PetShop.WebApi", "mlwinum.PetShop.WebApi\mlwinum.PetShop.WebApi.csproj", "{C9F1508A-A1DA-4BDA-8381-544CC9EB9B07}"
 EndProject

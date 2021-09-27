@@ -12,7 +12,7 @@
     <ItemGroup>
       <ProjectReference Include="..\mlwinum.PetShop.Core\mlwinum.PetShop.Core.csproj" />
       <ProjectReference Include="..\mlwinum.PetShop.Domain\mlwinum.PetShop.Domain.csproj" />
-      <ProjectReference Include="..\mlwinum.PetShop.Infrastructure.Data\mlwinum.PetShop.Infrastructure.Data.csproj" />
+      <ProjectReference Include="..\mlwinum.PetShop.Infrastructure.Static\mlwinum.PetShop.Infrastructure.Static.csproj" />
     </ItemGroup>
 
 </Project>

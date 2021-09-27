@@ -11,6 +11,7 @@ namespace mlwinum.PetShop.UI
     {
         static void Main(string[] args)
         {
+            /*
             //Repo
             IPetRepository _petRepository = new FakeDB();
             IPetTypeRepository _petTypeRepository = (IPetTypeRepository) _petRepository;
@@ -20,6 +21,7 @@ namespace mlwinum.PetShop.UI
             //Menu creation and start
             Menu menu = new Menu(_petService, _petTypeService);
             menu.Start();
+            */
         }
     }
 }

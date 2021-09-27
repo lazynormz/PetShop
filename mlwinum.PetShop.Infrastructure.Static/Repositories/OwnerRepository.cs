@@ -4,34 +4,36 @@ using mlwinum.PetShop.Domain.IRepositories;
 
 namespace mlwinum.PetShop.Infrastructure.Data.Repositories
 {
-    public class PetTypeRepository : IPetTypeRepository
+    public class OwnerRepository : IOwnerRepository
     {
-        public bool CreatePetType(PetType pet)
+        private static List<Owner> _owners;
+        private static int _id;
+        public OwnerRepository()
+        {
+            _owners = new List<Owner>();
+            _id = 0;
+        }
+        public Owner CreateOwner(Owner owner)
         {
             throw new System.NotImplementedException();
         }
 
-        public PetType GetPetType(string name)
+        public Owner GetOwner(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public PetType GetPetType(int id)
+        public IEnumerable<Owner> GetOwners()
         {
             throw new System.NotImplementedException();
         }
 
-        public PetType UpdatePetType(PetType oldPetType, PetType newPetType)
+        public Owner UpdateOwner()
         {
             throw new System.NotImplementedException();
         }
 
-        public bool DeletePetType(PetType pet)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<PetType> GetAllPetTypes()
+        public bool DeleteOwner()
         {
             throw new System.NotImplementedException();
         }

@@ -35,8 +35,6 @@ namespace mlwinum.PetShop.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "mlwinum.PetShop.WebApi", Version = "v1"});
             });
-            services.AddScoped<IPetRepository, FakeDB>();
-            services.AddScoped<IPetService, PetService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

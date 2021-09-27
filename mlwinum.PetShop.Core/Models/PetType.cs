@@ -6,11 +6,5 @@ namespace mlwinum.petshop.core.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-
-        public PetType(int id, string name)
-        {
-            ID = id;
-            Name = name;
-        }
     }
 }

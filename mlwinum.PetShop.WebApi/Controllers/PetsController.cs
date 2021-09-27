@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Host;
 using mlwinum.petshop.core.IServices;
 using mlwinum.petshop.core.Models;
+using mlwinum.PetShop.Infrastructure.Data.Repositories;
 
 namespace mlwinum.PetShop.WebApi.Controllers
 {
@@ -14,30 +15,30 @@ namespace mlwinum.PetShop.WebApi.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
-        private readonly IPetService _petService;
+        private readonly FakeDB _db;
 
-        public PetsController(IPetService petService)
+        public PetsController()
         {
-            _petService = petService;
+            _db = new FakeDB();
         }
 
         [HttpPost]
         public ActionResult<Pet> Create(Pet pet)
         {
-            return _petService.CreatePet(pet);
+            return _db.CreatePet(pet);
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> GetPets()
         {
-            return _petService.GetAllPets().ToList();
+            return _db.GetAllPets().ToList();
         }
 
         // GET: api/Pets/5
         [HttpGet("{id}")]
         public ActionResult<Pet> GetPet(long id)
         {
-            return _petService.GetPet(id);
+            return _db.GetPet(id);
         }
     }
 }
